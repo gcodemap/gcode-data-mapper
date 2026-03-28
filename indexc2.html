@@ -224,7 +224,7 @@
 <header>
     <div class="wrap">
         <span class="logo-mark">GFM</span>
-        <span class="header-label">G-Code Force Mapper &nbsp;·&nbsp; Spatial Sensor Alignment Utility</span>
+        <span class="header-label">G-Code Force Mapper · Spatial Data Mapping Utility</span>
     </div>
 </header>
 
@@ -234,7 +234,7 @@
         <p class="hero-tag">Machining Analysis Utility</p>
         <h1>Find the <em>exact G-code line</em><br>behind a tool failure or part scrap.</h1>
         <p class="hero-sub">
-            Upload your ISO G-code and dynamometer CSV. The tool aligns your force and torque data to the toolpath geometry and returns the specific G-code block, XYZ coordinate, and a confidence score — without manual time-offset guesswork.
+            Upload your ISO G-code and dynamometer CSV. The tool aligns your force, torque or any user defined data to the toolpath geometry and returns the specific G-code block, XYZ coordinate, and a confidence score, without manual time-offset guesswork.
         </p>
         <a href="https://gcode-map.streamlit.app" class="btn-launch">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0d0f12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -250,7 +250,7 @@
                 <ul>
                     <li>ISO G-code file</li>
                     <li>Dynamometer CSV — Fx, Fy, Fz, Mz columns</li>
-                    <li>Optional user-defined channel — vibration, temperature, acoustic emission, or any time-series signal</li>
+                    <li>Optional user-defined channel: Any time-series signal including Power, Vibration, Temperature, Acoustics etc. </li>
                 </ul>
             </div>
             <div class="card">
@@ -258,9 +258,9 @@
                 <ul>
                     <li>Peak-force G-code line number</li>
                     <li>XYZ location on the toolpath</li>
-                    <li>Interactive 3D force heatmap</li>
+                    <li>2D and 3D force heatmap</li>
                     <li>Confidence score with diagnostic breakdown</li>
-                    <li>Exportable mapped CSV with full metadata header</li>
+                    <li>Exportable mapped CSV </li>
                 </ul>
             </div>
             <div class="card">
@@ -268,7 +268,6 @@
                 <ul>
                     <li>3-axis machining</li>
                     <li>3+2 indexed operations with ISO output</li>
-                    <li>Fanuc, Sinumerik, and Haas ISO dialects</li>
                 </ul>
             </div>
             <div class="card">
@@ -288,79 +287,75 @@
         <div class="obj-list">
             <div class="obj-item">
                 <span class="obj-num">01</span>
-                <span class="obj-text"><strong>Late-start and early-finish recording is handled.</strong> Forces map correctly even if the dynamometer begins after the cut starts or stops before machining ends. No manual trimming needed.</span>
+                <span class="obj-text"><strong>Late-start and early-finish recording is handled.</strong> Forces map correctly even if data logging begins after the cut starts or stops before machining ends. No manual trimming needed.</span>
             </div>
             <div class="obj-item">
                 <span class="obj-num">02</span>
-                <span class="obj-text"><strong>Force data is never stretched to fit the G-code.</strong> Time-based alignment is the default. Distance-based mapping requires explicit user acceptance and is flagged in the export as reduced-accuracy.</span>
+                <span class="obj-text"><strong>Force data is never stretched to fit the G-code.</strong> Stretching the data requires explicit user acceptance and is flagged in the export as reduced-accuracy.</span>
             </div>
             <div class="obj-item">
                 <span class="obj-num">03</span>
-                <span class="obj-text"><strong>Rapid moves are excluded from cutting peaks.</strong> G0 traverse blocks are identified and removed. A force spike during a rapid will not be reported as the failure location.</span>
+                <span class="obj-text"><strong>Rapid moves are excluded from cutting peaks.</strong> G0 traverse blocks are identified and removed. A data spike during a rapid will not be reported as the failure location.</span>
             </div>
             <div class="obj-item">
                 <span class="obj-num">04</span>
-                <span class="obj-text"><strong>Every result includes a confidence score.</strong> The score reflects the quality of signal alignment. Low-confidence results are flagged. The mapping mode is recorded in every exported CSV so results are auditable.</span>
+                <span class="obj-text"><strong>Every result includes a confidence score.</strong> The score reflects the quality of signal alignment. Low-confidence results are flagged. </span>
             </div>
         </div>
     </section>
 
-    <section>
-        <h2>Scope boundaries</h2>
-        <div class="limit-grid">
-            <div class="limit-item">
-                <strong>No simultaneous 5-axis</strong>
-                Rotary axis words are ignored. Continuous A/B/C motion is not supported. 3+2 indexed with ISO output works correctly.
-            </div>
-            <div class="limit-item">
-                <strong>ISO format required</strong>
-                Heidenhain Klartext, Mazatrol, and conversational formats will not parse. Use ISO output from your post-processor.
-            </div>
-            <div class="limit-item">
-                <strong>No subprogram expansion</strong>
-                M98 and G65 calls are not expanded. Features in subprograms will not appear on the map.
-            </div>
-            <div class="limit-item">
-                <strong>No canned cycle expansion</strong>
-                Drilling and boring canned cycles are not expanded into toolpath geometry.
-            </div>
-            <div class="limit-item">
-                <strong>No G95 feed per revolution</strong>
-                G94 feed per minute is assumed throughout. G95 sections will have misread feedrates.
-            </div>
-            <div class="limit-item">
-                <strong>No multi-tool segmentation</strong>
-                Tool changes are not segmented. The full recording maps as one continuous pass.
-            </div>
-            <div class="limit-item">
-                <strong>No look-ahead modelling</strong>
-                Machine corner deceleration is not modelled. Accuracy may degrade in high-feed sections with many direction changes.
-            </div>
-            <div class="limit-item">
-                <strong>Rapids require explicit G0 or F word</strong>
-                If neither is present on a rapid block, that move may not be excluded from force analysis.
-            </div>
-        </div>
-    </section>
+	<section>
+		<h2>Scope boundaries</h2>
+		<div class="limit-grid">
+			<div class="limit-item">
+				<strong>No simultaneous 5-axis</strong>
+				Continuous A/B/C motion is not supported. 3+2 indexed operations with ISO output are supported.
+			</div>
+			<div class="limit-item">
+				<strong>ISO format required</strong>
+				Heidenhain Klartext, Mazatrol, and other conversational formats are not supported.
+			</div>
+			<div class="limit-item">
+				<strong>No subprogram expansion</strong>
+				Subroutine calls (M98, G65) are not expanded.
+			</div>
+			<div class="limit-item">
+				<strong>No canned cycle expansion</strong>
+				Drilling and boring cycles are not expanded into toolpath geometry.
+			</div>
+			<div class="limit-item">
+				<strong>Feed per revolution (G95) not supported</strong>
+				Feed is assumed to be G94 (per minute).
+			</div>
+			<div class="limit-item">
+				<strong>No multi-tool segmentation</strong>
+				Tool changes are not separated; the full recording is treated as a single pass.
+			</div>
+			<div class="limit-item">
+				<strong>No machine dynamics modelling</strong>
+				Look-ahead and corner deceleration are not modelled.
+			</div>
+			<div class="limit-item">
+				<strong>Rapids must be explicitly defined</strong>
+				Ambiguous blocks may not be excluded from cutting analysis.
+			</div>
+		</div>
+	</section>
 
     <section>
         <h2>Typical use cases</h2>
         <div class="usecase-list">
             <div class="usecase-item">
                 <strong>Tool breakage on a high-value part</strong>
-                Vericut passed, cutting data looks correct, but the tool still broke. Upload the post-run dynamometer CSV and G-code to find which toolpath block caused the overload. Applies to 3-axis and 3+2 indexed ISO operations.
+                Cutting data looks correct, but the tool still broke. Upload the post-run dynamometer CSV and G-code to find which toolpath block caused the overload. Applies to 3-axis and 3+2 indexed ISO operations.
             </div>
             <div class="usecase-item">
                 <strong>Identifying a specific toolpath geometry issue</strong>
-                A part scrapped and the question is whether a corner, thin wall, or sudden change in radial engagement caused it. The output is a G-code line number that can be searched directly in the CAM software.
+                A part scrapped and the question is whether a corner, thin wall, or sudden change in radial engagement caused it. The output is a G-code line number that can be searched directly in your CAM software.
             </div>
             <div class="usecase-item">
                 <strong>Comparing cutting conditions across multiple runs</strong>
-                Same G-code, different tools or parameters. Upload a different CSV each time to compare where peak forces occur and at what magnitude. The custom channel supports vibration, temperature, or acoustic emission alongside Fx, Fy, Fz, Mz.
-            </div>
-            <div class="usecase-item">
-                <strong>Correlating force data with toolpath segments for reporting</strong>
-                Map forces to specific path segments for internal reports or publication. Confidence score, diagnostic breakdown, and full metadata export support transparency and repeatability.
+                Same G-code, different tools or parameters. Upload a different CSV each time to compare where peak forces occur and at what magnitude. The custom channel supports user defined input alongside Fx, Fy, Fz, Mz.
             </div>
             <div class="usecase-item">
                 <strong>First use with no signal processing background</strong>
@@ -388,6 +383,8 @@
         <p>G-Code Force Mapper &nbsp;·&nbsp; Free research utility &nbsp;·&nbsp; No warranty</p>
     </div>
 </footer>
-
+<p style="display:none;">
+G-code force mapping, dynamometer analysis, CNC cutting data analysis, toolpath force visualization, G-code CSV alignment
+</p>
 </body>
 </html>
