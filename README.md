@@ -23,8 +23,8 @@ No installation. Runs in the browser.
 ## Compatibility
 
 - ISO dialects
-- 3-axis and 3+2 indexed machining
-- Not supported: simultaneous 5-axis, Heidenhain Klartext, Mazatrol, 
+- 3-axis machining
+- Not supported: 3+2 and simultaneous 5-axis, Heidenhain Klartext, Mazatrol, 
   subprogram expansion, canned cycles, G95 feed per revolution
 
 ## Launch
