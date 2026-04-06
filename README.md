@@ -26,6 +26,12 @@ No installation. Runs in the browser.
 - 3-axis machining
 - Not supported: 3+2 and simultaneous 5-axis, Heidenhain Klartext, Mazatrol, 
   subprogram expansion, canned cycles, G95 feed per revolution
+  
+## Quick Start
+
+- Load NC: Upload your G-code file
+- Load Data: Upload your time-series data (Force, Power, Torque, Vibration, etc.)
+- Analyze: The tool aligns the datasets and highlights the peak data location on the toolpath.
 
 ## Launch
 
