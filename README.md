@@ -35,7 +35,7 @@ No installation. Runs in the browser.
 
 ## Launch
 
-[Open Web Utility](https://gcode-map.streamlit.app)
+[Open Web Utility](https://gcodemap.streamlit.app)
 
 [Full documentation and scope](https://gcodemap.github.io/gcode-data-mapper/)
 
